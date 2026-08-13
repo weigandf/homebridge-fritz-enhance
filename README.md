@@ -325,7 +325,7 @@ Die Konfiguration erfolgt über die `config.json` in Homebridge:
 
 ```json
 {
-    "platform": "Fritz!Platform",
+    "platform": "FRITZ!Box",
     "name": "Fritz!Platform", 
     "username": "IhrFritzBoxBenutzername",
     "password": "IhrFritzBoxPasswort",
@@ -403,14 +403,14 @@ Sie können mehrere Fritz!Box Geräte einbinden:
 {
     "platforms": [
         {
-            "platform": "Fritz!Platform",
+            "platform": "FRITZ!Box",
             "name": "Haupthaus",
             "username": "admin1",
             "password": "password1",
             "url": "http://192.168.1.1"
         },
         {
-            "platform": "Fritz!Platform", 
+            "platform": "FRITZ!Box", 
             "name": "Gästehaus",
             "username": "admin2",
             "password": "password2",
@@ -426,7 +426,7 @@ Sie können Geräte nach Namen filtern:
 
 ```json
 {
-    "platform": "Fritz!Platform",
+    "platform": "FRITZ!Box",
     "username": "admin",
     "password": "password",
     "filter": {
@@ -460,7 +460,7 @@ Für erweiterte Fehlersuche:
 
 ```json
 {
-    "platform": "Fritz!Platform",
+    "platform": "FRITZ!Box",
     "username": "admin",
     "password": "password",
     "debug": true
