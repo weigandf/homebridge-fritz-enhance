@@ -6,6 +6,7 @@
     "Andreas Goetz <cpuidle@gmx.de> (Original Author)",
     "glowf1sh (https://github.com/glowf1sh)",
     "puneetdixit200 (https://github.com/puneetdixit200) - Homebridge 2 custom characteristics fix (glowf1sh/homebridge-fritz-new#19)",
+    "BeastiW (https://github.com/BeastiW) - Lightbulb support (glowf1sh/homebridge-fritz-new#17)",
     "weigandf (https://github.com/weigandf) - AI refactoring only"
   ],
   "homepage": "https://github.com/weigandf/homebridge-fritz-enhance#readme",
@@ -30,7 +31,8 @@
     "window sensor",
     "homebridge-fritz replacement",
     "security patched",
-    "actively maintained"
+    "actively maintained",
+    "lightbulb"
   ],
   "files": [
     "index.js",

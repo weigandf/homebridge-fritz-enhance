@@ -20,13 +20,13 @@
           "name": "Guest WLAN",
           "tr64Fallback": false
         },
-        "08761 0000434": {
+        "087610000434": {
           "display": false
         },
-        "11657 0012345": {
+        "116570012345": {
           "TemperatureSensor": false
         },
-        "12345 6789012": {
+        "123456789012": {
           "invert": true
         }
       }

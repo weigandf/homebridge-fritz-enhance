@@ -3,7 +3,7 @@
   "pluginType": "platform",
   "singular": true,
   "headerDisplay": "FRITZ!Box Smart-Home-Geräte (DECT-Thermostate, Steckdosen, Sensoren, Taster) und Gäste-WLAN in HomeKit. Der Benutzer benötigt in der FRITZ!Box die Berechtigung „Smart Home“ (und für das Gäste-WLAN „FRITZ!Box Einstellungen“).",
-  "footerDisplay": "Gerätespezifische Einstellungen pro AIN (z. B. `\"devices\": { \"08761 0000434\": { \"display\": false } }`) bitte im JSON-Editor pflegen – siehe README.",
+  "footerDisplay": "Gerätespezifische Einstellungen pro AIN (AIN ohne Leerzeichen, z. B. `\"devices\": { \"087610000434\": { \"display\": false } }`) bitte im JSON-Editor pflegen – siehe README.",
   "schema": {
     "type": "object",
     "properties": {

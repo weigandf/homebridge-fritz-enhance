@@ -5,7 +5,7 @@
 > Dieses Repository ist ein Fork von [glowf1sh/homebridge-fritz-new](https://github.com/glowf1sh/homebridge-fritz-new).
 > Dort fehlt leider noch der Fix für **Homebridge 2.0**. Dieser Fork enthält diesen Fix
 > ([PR #19](https://github.com/glowf1sh/homebridge-fritz-new/pull/19) von [puneetdixit200](https://github.com/puneetdixit200)) sowie weitere Fixes und Updates
-> (z. B. Energiedaten unter Homebridge 2 wieder lesbar, `onGet`/`onSet`-Handler, Entfernung von `lodash.get`).
+> (z. B. Energiedaten unter Homebridge 2 wieder lesbar, `onGet`/`onSet`-Handler, Lampen-Unterstützung, Entfernung von `lodash.get`).
 >
 > Der Fork wird nur so lange genutzt, bis die Änderungen im Original-Repository verfügbar sind.
 >
@@ -361,7 +361,7 @@ Alternativ direkt in der `config.json`:
     },
     "devices": {
         "wifi": { "display": true, "name": "Guest WLAN" },
-        "08761 0000434": { "display": false }
+        "087610000434": { "display": false }
     }
 }
 ```
@@ -389,7 +389,7 @@ Alternativ direkt in der `config.json`:
 
 ### Gerätespezifische Einstellungen (`devices`)
 
-Geräte werden über ihre **AIN** angesprochen (zu finden in der FRITZ!Box unter *Smart Home → Gerät bearbeiten*, inkl. Leerzeichen, z. B. `"08761 0000434"`).
+Geräte werden über ihre **AIN** angesprochen (zu finden in der FRITZ!Box unter *Smart Home → Gerät bearbeiten*) – **ohne Leerzeichen**, z. B. `"087610000434"` für die AIN `08761 0000434`.
 
 | Schlüssel | Option | Standard | Beschreibung |
 |-----------|--------|----------|--------------|
@@ -412,11 +412,13 @@ Geräte werden über ihre **AIN** angesprochen (zu finden in der FRITZ!Box unter
 - **Temperatursensoren** (z. B. FRITZ!DECT 440, Geräte mit Temperaturfunktion)
 - **Tür-/Fensterkontakte & Alarmsensoren** (z. B. FRITZ!DECT 350, HAN-FUN)
 - **Taster** (FRITZ!DECT 400/440)
+- **Lampen** (FRITZ!DECT 500, HAN-FUN-Leuchten): Ein/Aus und Helligkeit
+  (basierend auf [PR #17](https://github.com/glowf1sh/homebridge-fritz-new/pull/17) von [BeastiW](https://github.com/BeastiW))
 - **Gäste-WLAN**: Ein-/Ausschalten
 
 ### ❌ Noch nicht unterstützt
 
-- LED-Lampen (FRITZ!DECT 500/600)
+- Farbe und Farbtemperatur bei Lampen (nur Ein/Aus und Helligkeit)
 - Rollladensteuerung (z. B. Rademacher RolloTron) – wird erkannt, aber nicht in HomeKit angelegt
 
 ## 🔍 Fehlerbehebung

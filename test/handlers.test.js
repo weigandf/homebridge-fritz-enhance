@@ -62,6 +62,7 @@ describe('HAP onGet/onSet handlers', function() {
     const FritzWifiAccessory = require('../lib/accessories/wifi')(homebridge);
     const FritzButtonAccessory = require('../lib/accessories/button')(homebridge);
     const FritzAlarmSensorAccessory = require('../lib/accessories/alarmsensor')(homebridge);
+    const FritzLightbulbAccessory = require('../lib/accessories/lightbulb')(homebridge);
 
     describe('outlet', function() {
         function createOutlet(fritzImpl) {
@@ -171,6 +172,50 @@ describe('HAP onGet/onSet handlers', function() {
             assert.strictEqual(typeof value, 'number');
 
             sensor.cleanup();
+        });
+    });
+
+    describe('lightbulb', function() {
+        function createLight(fritzImpl) {
+            const platform = createPlatform(fritzImpl);
+            platform.getDevice = () => ({
+                productname: 'FRITZ!DECT 500',
+                state: true,
+                features: { hasDimmer: true, hasLevelControl: true },
+                values: { levelcontrol: { levelpercentage: 40 } }
+            });
+            const accessory = new PlatformAccessory('Lamp', hap.uuid.generate('light-test'));
+            accessory.context.features = { hasDimmer: true, hasLevelControl: true };
+            const light = new FritzLightbulbAccessory(platform, '77777 8888888', 'lightbulb', accessory);
+            return { platform, light };
+        }
+
+        it('reads On and Brightness from the device list', async function() {
+            const { light } = createLight(async () => undefined);
+            const service = light.services.Lightbulb;
+
+            assert.strictEqual(await service.getCharacteristic(Characteristic.On).handleGetRequest(), true);
+            assert.strictEqual(await service.getCharacteristic(Characteristic.Brightness).handleGetRequest(), 40);
+        });
+
+        it('switches off with setsimpleonoff value 0', async function() {
+            const { platform, light } = createLight(async () => undefined);
+
+            await light.services.Lightbulb.getCharacteristic(Characteristic.On).handleSetRequest(false);
+            await tick();
+
+            assert(platform.calls.some(c => c[0] === 'setSimpleOnOff' && c[2] === 0));
+            assert.strictEqual(light.services.Lightbulb.fritzState, false);
+        });
+
+        it('sets brightness in percent', async function() {
+            const { platform, light } = createLight(async () => undefined);
+
+            await light.services.Lightbulb.getCharacteristic(Characteristic.Brightness).handleSetRequest(75);
+            await tick();
+
+            assert(platform.calls.some(c => c[0] === 'setLevelPercentage' && c[2] === 75));
+            assert.strictEqual(light.services.Lightbulb.fritzBrightness, 75);
         });
     });
 });
