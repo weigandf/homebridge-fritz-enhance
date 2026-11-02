@@ -5,6 +5,30 @@ Alle bemerkenswerten Änderungen an diesem Projekt werden in dieser Datei dokume
 Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/),
 und dieses Projekt befolgt [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-11-02
+
+Erste Version des Forks `homebridge-fritz-enhance` (Fork von glowf1sh/homebridge-fritz-new).
+
+### ✨ Neu
+- **Lampen** (FRITZ!DECT 500, HAN-FUN-Leuchten): Ein/Aus und Helligkeit (basierend auf PR #17 von BeastiW)
+- **`config.schema.json`**: Konfiguration über die Homebridge-Oberfläche
+- **CI**: Tests und `npm audit` bei jedem Push
+
+### 🐛 Fixes
+- **Homebridge 2**: Custom Characteristics als Klassen (PR #19 von puneetdixit200)
+- **Homebridge 2**: Energiedaten (Leistung, Verbrauch, Spannung) waren nicht lesbar (`Perms.READ` existiert nicht mehr)
+- **Homebridge 2**: `Service.Battery` statt `Service.BatteryService`
+- Alle Handler auf `onGet`/`onSet` umgestellt; Thermostat-Setter, nachträglich angelegte Batterie-Services und Taster-Polling korrigiert
+- Absturz beim Start, wenn die URL mit `/` endet
+- Lampen/HAN-FUN-Geräte wurden über Bit 8192 fälschlich als Thermostat erkannt
+- Offline-Steckdosen übertragen keine ungültigen Werte mehr an HomeKit
+
+### 🔧 Wartung
+- Paket umbenannt in `homebridge-fritz-enhance`
+- `lodash.get` entfernt, axios auf 1.21 (Sicherheitsupdates)
+- Node.js `^22.12.0 || >=24.0.0`
+- Dokumentation auf tatsächlich unterstützte Optionen korrigiert
+
 ## [1.0.76] - 2025-08-15
 
 ### 📄 Dokumentation

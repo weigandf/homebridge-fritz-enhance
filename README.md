@@ -9,19 +9,15 @@
 >
 > Der Fork wird nur so lange genutzt, bis die Änderungen im Original-Repository verfügbar sind.
 >
-> **Installation** (nicht auf npm veröffentlicht, direkt von GitHub):
-> ```bash
-> # Standard-Homebridge-Installation (z. B. Raspberry Pi Image / hb-service)
-> sudo npm --prefix /var/lib/homebridge install github:weigandf/homebridge-fritz-enhance
-> ```
+> **Installation:** In der Homebridge-Oberfläche unter *Plugins* nach **`homebridge-fritz-enhance`** suchen und installieren
+> (oder `npm install homebridge-fritz-enhance`).
 >
 > **Umstieg von `homebridge-fritz-new`:** Das Paket heißt hier `homebridge-fritz-enhance`. Vorher
 > `homebridge-fritz-new` deinstallieren. Die Konfiguration (`"platform": "FRITZ!Box"`) bleibt gleich. Da Homebridge
 > Accessories pro Plugin-Name speichert, werden die Geräte einmalig neu angelegt – Raumzuordnungen und
 > Automationen in der Home-App ggf. neu setzen.
 
-> **🎆 STABLE RELEASE 1.0.76 - Produktionsreif für FRITZ!DECT 301 und DECT 200**  
-> Vollständig stabil, ohne UnhandledPromiseRejections oder Session-Errors.
+> **Version 1.1.0 (Fork)** – Homebridge 1.x und 2.x, Lampen-Unterstützung, Energiedaten unter Homebridge 2 – siehe [CHANGELOG](CHANGELOG.md).
 
 ## ✅ Produktionsstatus Version 1.0.76
 
@@ -59,11 +55,9 @@
 ### 🚀 Installation des neuen Pakets:
 
 ```bash
-# Global für Homebridge UI
-npm install -g homebridge-fritz-new
-
-# Für lokale Installation
-npm install homebridge-fritz-new
+# Homebridge UI: Plugins → nach "homebridge-fritz-enhance" suchen
+# oder per Terminal:
+npm install homebridge-fritz-enhance
 ```
 
 ### Alternative Installation über Git:
