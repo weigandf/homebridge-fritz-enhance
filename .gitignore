@@ -10,7 +10,6 @@ bugs.md
 .claude/
 
 # Test-Dateien
-test/
 test-*.md
 *.test.md
 gh_2.70.0_linux_amd64*

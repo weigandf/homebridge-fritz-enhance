@@ -2,14 +2,12 @@
   "platforms": [
     {
       "platform": "FRITZ!Box",
-      "name": "My FRITZ!Box",
+      "name": "FRITZ!Box",
       "username": "",
       "password": "",
       "url": "http://fritz.box",
-      "interval": 60,
-      "concurrent": false,
-      "debug": false,
       "timeout": 15000,
+      "debug": false,
       "polling": {
         "discovery": 300000,
         "switchStates": 3000,
@@ -17,13 +15,19 @@
         "batteryStatus": 900000
       },
       "devices": {
-        "My Device Name": {
+        "wifi": {
+          "display": true,
+          "name": "Guest WLAN",
+          "tr64Fallback": false
+        },
+        "08761 0000434": {
           "display": false
         },
-        "My Thermostat": {
-          "minValue": 15,
-          "maxValue": 25,
-          "minStep": 0.5
+        "11657 0012345": {
+          "TemperatureSensor": false
+        },
+        "12345 6789012": {
+          "invert": true
         }
       }
     }

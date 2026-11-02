@@ -329,24 +329,27 @@ Wenn Sie Homebridge Config UI X verwenden:
 
 ## 📖 Konfiguration
 
-Die Konfiguration erfolgt über die `config.json` in Homebridge:
+Am einfachsten über die **Homebridge-Oberfläche** (Plugin-Einstellungen) – das Plugin bringt eine `config.schema.json` mit.
+Alternativ direkt in der `config.json`:
 
 ```json
 {
     "platform": "FRITZ!Box",
-    "name": "Fritz!Platform", 
+    "name": "FRITZ!Box",
     "username": "IhrFritzBoxBenutzername",
     "password": "IhrFritzBoxPasswort",
     "url": "http://fritz.box",
-    "strictSSL": false,
-    "interval": 30,
-    "concurrent": 1,
+    "timeout": 15000,
+    "debug": false,
     "polling": {
-        "init": 30000,
-        "discovery": 60000,
+        "discovery": 300000,
         "switchStates": 3000,
         "sensorData": 10000,
         "batteryStatus": 900000
+    },
+    "devices": {
+        "wifi": { "display": true, "name": "Guest WLAN" },
+        "08761 0000434": { "display": false }
     }
 }
 ```
@@ -355,94 +358,54 @@ Die Konfiguration erfolgt über die `config.json` in Homebridge:
 
 | Option | Typ | Standard | Beschreibung |
 |--------|-----|----------|--------------|
-| `username` | string | *Pflicht* | Fritz!Box Benutzername |
-| `password` | string | *Pflicht* | Fritz!Box Passwort |
-| `url` | string | `http://fritz.box` | Fritz!Box URL |
-| `strictSSL` | boolean | `false` | SSL-Zertifikat prüfen |
-| `interval` | number | `30` | Globales Update-Intervall (Sekunden) |
-| `concurrent` | number | `1` | Gleichzeitige API-Anfragen |
-| `polling` | object | siehe unten | Individuelle Polling-Intervalle |
+| `username` | string | *Pflicht* | FRITZ!Box-Benutzername (benötigt Smart-Home-Rechte) |
+| `password` | string | *Pflicht* | FRITZ!Box-Passwort |
+| `url` | string | `http://fritz.box` | FRITZ!Box-URL (`http://` oder `https://`) |
+| `timeout` | number | `15000` | Timeout für Anfragen an die FRITZ!Box (ms) |
+| `debug` | boolean | `false` | Vollständige API-Antworten bei Fehlern loggen |
+| `polling` | object | siehe unten | Polling-Intervalle |
+| `devices` | object | `{}` | Gerätespezifische Einstellungen, siehe unten |
 
 ### Polling-Intervalle (in Millisekunden)
 
 | Option | Standard | Minimum | Beschreibung |
 |--------|----------|---------|--------------|
-| `init` | 30000 | 1000 | Initiale Wartezeit beim Start |
-| `discovery` | 60000 | 1000 | Geräte-Discovery |
-| `switchStates` | 3000 | 1000 | Schalter-Status |
-| `sensorData` | 10000 | 1000 | Sensor-Daten |
-| `batteryStatus` | 900000 | 1000 | Batterie-Status |
+| `discovery` | 300000 | 1000 | Erkennung neuer/entfernter Geräte |
+| `switchStates` | 3000 | 1000 | Schaltzustände der Steckdosen |
+| `sensorData` | 10000 | 1000 | Temperatur- und Energiedaten |
+| `batteryStatus` | 900000 | 1000 | Batteriestatus der Thermostate |
+
+### Gerätespezifische Einstellungen (`devices`)
+
+Geräte werden über ihre **AIN** angesprochen (zu finden in der FRITZ!Box unter *Smart Home → Gerät bearbeiten*, inkl. Leerzeichen, z. B. `"08761 0000434"`).
+
+| Schlüssel | Option | Standard | Beschreibung |
+|-----------|--------|----------|--------------|
+| `<AIN>` | `display` | `true` | Gerät in HomeKit anzeigen |
+| `<AIN>` | `TemperatureSensor` | `true` | Temperatursensor anlegen (Steckdosen und eigenständige Sensoren) |
+| `<AIN>` | `ContactSensor` | `true` | Kontakt-/Alarmsensor anlegen |
+| `<AIN>` | `invert` | `false` | Zustand des Kontakt-/Alarmsensors invertieren |
+| `wifi` | `display` | `true` | Gäste-WLAN-Schalter anzeigen |
+| `wifi` | `name` | `Guest WLAN` | Name des Gäste-WLAN-Schalters |
+| `wifi` | `tr64Fallback` | `false` | TR-064 als Fallback für das Gäste-WLAN |
+| `wifi` | `tr64Port` | `49443` | TR-064-Port |
+| `wifi` | `tr64Ssl` | `true` | TR-064 über HTTPS |
+
+> Hinweis: Pro Homebridge-Instanz wird **eine** FRITZ!Box unterstützt.
 
 ## 🔌 Unterstützte Geräte
 
-### ✅ Vollständig unterstützt
+- **FRITZ!DECT 200/210, FRITZ!Powerline 546E**: Schaltbare Steckdose mit Energiemessung (Leistung, Verbrauch, Spannung – sichtbar z. B. in der Eve-App) und Temperatursensor
+- **FRITZ!DECT 300/301/302, Comet DECT**: Heizkörperthermostate inkl. Batteriestatus
+- **Temperatursensoren** (z. B. FRITZ!DECT 440, Geräte mit Temperaturfunktion)
+- **Tür-/Fensterkontakte & Alarmsensoren** (z. B. FRITZ!DECT 350, HAN-FUN)
+- **Taster** (FRITZ!DECT 400/440)
+- **Gäste-WLAN**: Ein-/Ausschalten
 
-- **FRITZ!DECT 200/210**: Schaltbare Steckdose mit Energiemessung
-- **FRITZ!DECT 300/301/302**: Heizkörperthermostate
-- **FRITZ!DECT 500**: LED-Lampe (Farbe, Helligkeit, Temperatur)
-- **FRITZ!DECT 100**: Temperatursensor
-- **FRITZ!DECT 140**: Tür-/Fensterkontakt
-- **FRITZ!DECT 400**: Universaltaster
-- **FRITZ!DECT 440**: 4-Taster mit Display und Temperatursensor
-- **FRITZ!Powerline 546E**: Schaltbare Steckdose
-- **Comet DECT**: Heizkörperthermostat
-- **Magenta SmartHome**: Kompatible Geräte
-- **Rademacher RolloTron**: Rollladensteuerung
-- **ELRO Connects**: Kompatible Geräte
+### ❌ Noch nicht unterstützt
 
-### 🚧 Experimentell
-
-- **FRITZ!DECT 350**: Tür-/Fensterkontakt (neu)
-- **FRITZ!DECT 600**: LED-Lampe (neu)
-
-### 🔧 Spezial-Features
-
-- **Gäste-WLAN**: Ein-/Ausschalten des Gäste-WLANs
-- **WAN-IP**: Anzeige der externen IP-Adresse
-- **Anrufbeantworter**: Status-Anzeige
-
-## 🛠️ Erweiterte Konfiguration
-
-### Mehrere Fritz!Boxen
-
-Sie können mehrere Fritz!Box Geräte einbinden:
-
-```json
-{
-    "platforms": [
-        {
-            "platform": "FRITZ!Box",
-            "name": "Haupthaus",
-            "username": "admin1",
-            "password": "password1",
-            "url": "http://192.168.1.1"
-        },
-        {
-            "platform": "FRITZ!Box", 
-            "name": "Gästehaus",
-            "username": "admin2",
-            "password": "password2",
-            "url": "http://192.168.2.1"
-        }
-    ]
-}
-```
-
-### Filter für Geräte
-
-Sie können Geräte nach Namen filtern:
-
-```json
-{
-    "platform": "FRITZ!Box",
-    "username": "admin",
-    "password": "password",
-    "filter": {
-        "include": ["Wohnzimmer", "Küche"],
-        "exclude": ["Test", "Debug"]
-    }
-}
-```
+- LED-Lampen (FRITZ!DECT 500/600)
+- Rollladensteuerung (z. B. Rademacher RolloTron) – wird erkannt, aber nicht in HomeKit angelegt
 
 ## 🔍 Fehlerbehebung
 

@@ -1,0 +1,149 @@
+{
+  "pluginAlias": "FRITZ!Box",
+  "pluginType": "platform",
+  "singular": true,
+  "headerDisplay": "FRITZ!Box Smart-Home-Geräte (DECT-Thermostate, Steckdosen, Sensoren, Taster) und Gäste-WLAN in HomeKit. Der Benutzer benötigt in der FRITZ!Box die Berechtigung „Smart Home“ (und für das Gäste-WLAN „FRITZ!Box Einstellungen“).",
+  "footerDisplay": "Gerätespezifische Einstellungen pro AIN (z. B. `\"devices\": { \"08761 0000434\": { \"display\": false } }`) bitte im JSON-Editor pflegen – siehe README.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "FRITZ!Box",
+        "required": true
+      },
+      "url": {
+        "title": "FRITZ!Box URL",
+        "type": "string",
+        "format": "uri",
+        "default": "http://fritz.box",
+        "description": "Muss mit http:// oder https:// beginnen."
+      },
+      "username": {
+        "title": "Benutzername",
+        "type": "string",
+        "required": true
+      },
+      "password": {
+        "title": "Passwort",
+        "type": "string",
+        "required": true,
+        "x-schema-form": {
+          "type": "password"
+        }
+      },
+      "timeout": {
+        "title": "Timeout (ms)",
+        "type": "integer",
+        "default": 15000,
+        "minimum": 1000,
+        "description": "Maximale Wartezeit auf eine Antwort der FRITZ!Box."
+      },
+      "debug": {
+        "title": "Erweiterte Fehlerausgabe",
+        "type": "boolean",
+        "default": false,
+        "description": "Gibt bei API-Fehlern die vollständige Antwort der FRITZ!Box aus."
+      },
+      "polling": {
+        "title": "Polling-Intervalle",
+        "type": "object",
+        "properties": {
+          "discovery": {
+            "title": "Geräte-Erkennung (ms)",
+            "type": "integer",
+            "default": 300000,
+            "minimum": 1000
+          },
+          "switchStates": {
+            "title": "Schaltzustände (ms)",
+            "type": "integer",
+            "default": 3000,
+            "minimum": 1000
+          },
+          "sensorData": {
+            "title": "Sensordaten (ms)",
+            "type": "integer",
+            "default": 10000,
+            "minimum": 1000
+          },
+          "batteryStatus": {
+            "title": "Batteriestatus (ms)",
+            "type": "integer",
+            "default": 900000,
+            "minimum": 1000
+          }
+        }
+      },
+      "devices": {
+        "title": "Geräte",
+        "type": "object",
+        "properties": {
+          "wifi": {
+            "title": "Gäste-WLAN",
+            "type": "object",
+            "properties": {
+              "display": {
+                "title": "Gäste-WLAN-Schalter anzeigen",
+                "type": "boolean",
+                "default": true
+              },
+              "name": {
+                "title": "Name",
+                "type": "string",
+                "default": "Guest WLAN"
+              },
+              "tr64Fallback": {
+                "title": "TR-064 als Fallback verwenden",
+                "type": "boolean",
+                "default": false
+              },
+              "tr64Port": {
+                "title": "TR-064 Port",
+                "type": "integer",
+                "default": 49443
+              },
+              "tr64Ssl": {
+                "title": "TR-064 über HTTPS",
+                "type": "boolean",
+                "default": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "layout": [
+    "name",
+    "url",
+    "username",
+    "password",
+    {
+      "type": "fieldset",
+      "title": "Gäste-WLAN",
+      "expandable": true,
+      "items": [
+        "devices.wifi.display",
+        "devices.wifi.name",
+        "devices.wifi.tr64Fallback",
+        "devices.wifi.tr64Port",
+        "devices.wifi.tr64Ssl"
+      ]
+    },
+    {
+      "type": "fieldset",
+      "title": "Erweitert",
+      "expandable": true,
+      "items": [
+        "timeout",
+        "debug",
+        "polling.discovery",
+        "polling.switchStates",
+        "polling.sensorData",
+        "polling.batteryStatus"
+      ]
+    }
+  ]
+}

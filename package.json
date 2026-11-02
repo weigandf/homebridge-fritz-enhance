@@ -31,6 +31,7 @@
   ],
   "files": [
     "index.js",
+    "config.schema.json",
     "lib/",
     "README.md",
     "LICENSE",
