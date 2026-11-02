@@ -40,6 +40,13 @@
         "minimum": 1000,
         "description": "Maximale Wartezeit auf eine Antwort der FRITZ!Box."
       },
+      "interval": {
+        "title": "Abfrageintervall (Sekunden)",
+        "type": "integer",
+        "default": 60,
+        "minimum": 5,
+        "description": "Polling für Thermostate, Temperatur-/Kontaktsensoren, Taster und Gäste-WLAN."
+      },
       "debug": {
         "title": "Erweiterte Fehlerausgabe",
         "type": "boolean",
@@ -138,6 +145,7 @@
       "expandable": true,
       "items": [
         "timeout",
+        "interval",
         "debug",
         "polling.discovery",
         "polling.switchStates",

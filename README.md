@@ -352,6 +352,7 @@ Alternativ direkt in der `config.json`:
     "password": "IhrFritzBoxPasswort",
     "url": "http://fritz.box",
     "timeout": 15000,
+    "interval": 60,
     "debug": false,
     "polling": {
         "discovery": 300000,
@@ -374,6 +375,7 @@ Alternativ direkt in der `config.json`:
 | `password` | string | *Pflicht* | FRITZ!Box-Passwort |
 | `url` | string | `http://fritz.box` | FRITZ!Box-URL (`http://` oder `https://`) |
 | `timeout` | number | `15000` | Timeout für Anfragen an die FRITZ!Box (ms) |
+| `interval` | number | `60` | Abfrageintervall (Sekunden) für Thermostate, Temperatur-/Kontaktsensoren, Taster und Gäste-WLAN |
 | `debug` | boolean | `false` | Vollständige API-Antworten bei Fehlern loggen |
 | `polling` | object | siehe unten | Polling-Intervalle |
 | `devices` | object | `{}` | Gerätespezifische Einstellungen, siehe unten |
