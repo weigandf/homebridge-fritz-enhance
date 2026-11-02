@@ -1,12 +1,24 @@
-# homebridge-fritz-new - Produktionsreifer Fork mit Sicherheitsupdates
+# homebridge-fritz-enhance - Fork von homebridge-fritz-new mit Homebridge-2-Fixes
 
 > **ℹ️ Hinweis zu diesem Fork (`weigandf/homebridge-fritz-enhance`)**
 >
 > Dieses Repository ist ein Fork von [glowf1sh/homebridge-fritz-new](https://github.com/glowf1sh/homebridge-fritz-new).
-> Dort fehlt leider noch der Fix für **Homebridge 2.0**. Dieser Fork enthält diesen Fix sowie weitere Fixes und Updates
-> (z. B. Entfernung der veralteten Abhängigkeit `lodash.get`).
+> Dort fehlt leider noch der Fix für **Homebridge 2.0**. Dieser Fork enthält diesen Fix
+> ([PR #19](https://github.com/glowf1sh/homebridge-fritz-new/pull/19) von [puneetdixit200](https://github.com/puneetdixit200)) sowie weitere Fixes und Updates
+> (z. B. Energiedaten unter Homebridge 2 wieder lesbar, `onGet`/`onSet`-Handler, Entfernung von `lodash.get`).
 >
 > Der Fork wird nur so lange genutzt, bis die Änderungen im Original-Repository verfügbar sind.
+>
+> **Installation** (nicht auf npm veröffentlicht, direkt von GitHub):
+> ```bash
+> # Standard-Homebridge-Installation (z. B. Raspberry Pi Image / hb-service)
+> sudo npm --prefix /var/lib/homebridge install github:weigandf/homebridge-fritz-enhance
+> ```
+>
+> **Umstieg von `homebridge-fritz-new`:** Das Paket heißt hier `homebridge-fritz-enhance`. Vorher
+> `homebridge-fritz-new` deinstallieren. Die Konfiguration (`"platform": "FRITZ!Box"`) bleibt gleich. Da Homebridge
+> Accessories pro Plugin-Name speichert, werden die Geräte einmalig neu angelegt – Raumzuordnungen und
+> Automationen in der Home-App ggf. neu setzen.
 
 > **🎆 STABLE RELEASE 1.0.76 - Produktionsreif für FRITZ!DECT 301 und DECT 200**  
 > Vollständig stabil, ohne UnhandledPromiseRejections oder Session-Errors.

@@ -7,10 +7,12 @@
  * @license MIT
  */
 
-/* jslint node: true, laxcomma: true, esversion: 6 */
+/* jslint node: true, laxcomma: true, esversion: 11 */
 "use strict";
+
+const { PLUGIN_NAME, PLATFORM_NAME } = require('./lib/constants');
 
 module.exports = function(homebridge) {
     let FritzPlatform = require('./lib/platform')(homebridge);
-    homebridge.registerPlatform("homebridge-fritz-new", "FRITZ!Box", FritzPlatform);
+    homebridge.registerPlatform(PLUGIN_NAME, PLATFORM_NAME, FritzPlatform);
 };

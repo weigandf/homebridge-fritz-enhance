@@ -21,8 +21,8 @@ Characteristic.Formats = {
     FLOAT: 'float'
 };
 Characteristic.Perms = {
-    READ: 'read',
-    NOTIFY: 'notify'
+    PAIRED_READ: 'pr',
+    NOTIFY: 'ev'
 };
 
 const homebridge = {
@@ -35,7 +35,13 @@ const homebridge = {
 };
 
 describe('custom power characteristics', function() {
-    const FritzPlatform = require('../lib/platform')(homebridge);
+    let FritzPlatform;
+
+    // Initialise with the mock in the test itself: platform.js keeps module-level
+    // HAP references that other test files initialise with the real HAP.
+    beforeEach(function() {
+        FritzPlatform = require('../lib/platform')(homebridge);
+    });
 
     it('can be instantiated when Homebridge exposes Characteristic as a class', function() {
         const powerUsage = new FritzPlatform.PowerUsage();
@@ -45,7 +51,7 @@ describe('custom power characteristics', function() {
         assert.deepStrictEqual(powerUsage.props, {
             format: Characteristic.Formats.FLOAT,
             unit: 'W',
-            perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
+            perms: [Characteristic.Perms.PAIRED_READ, Characteristic.Perms.NOTIFY]
         });
     });
 });

@@ -1,11 +1,14 @@
 {
-  "name": "homebridge-fritz-new",
+  "name": "homebridge-fritz-enhance",
   "version": "1.0.76",
   "author": "glowf1sh",
   "contributors": [
-    "Andreas Goetz <cpuidle@gmx.de> (Original Author)"
+    "Andreas Goetz <cpuidle@gmx.de> (Original Author)",
+    "glowf1sh (https://github.com/glowf1sh)",
+    "puneetdixit200 (https://github.com/puneetdixit200) - Homebridge 2 custom characteristics fix (glowf1sh/homebridge-fritz-new#19)",
+    "weigandf (https://github.com/weigandf) - AI refactoring only"
   ],
-  "homepage": "https://github.com/glowf1sh/homebridge-fritz-new#readme",
+  "homepage": "https://github.com/weigandf/homebridge-fritz-enhance#readme",
   "description": "STABLE RELEASE 1.0.76 - Production-ready Homebridge plugin for FRITZ!DECT 301 thermostats and FRITZ!DECT 200 smart outlets with full power monitoring (visible in Eve app). All issues fixed. The definitive HomeKit integration for FRITZ!Box.",
   "keywords": [
     "homebridge-plugin",
@@ -41,10 +44,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/glowf1sh/homebridge-fritz-new.git"
+    "url": "git+https://github.com/weigandf/homebridge-fritz-enhance.git"
   },
   "bugs": {
-    "url": "https://github.com/glowf1sh/homebridge-fritz-new/issues"
+    "url": "https://github.com/weigandf/homebridge-fritz-enhance/issues"
   },
   "main": "index.js",
   "scripts": {
@@ -63,6 +66,7 @@
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
+    "@homebridge/hap-nodejs": "^2.3.0",
     "chai": "^5.2.1",
     "jshint": "^2.10.2",
     "mocha": "^11.7.1",
