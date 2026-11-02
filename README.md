@@ -1,5 +1,13 @@
 # homebridge-fritz-new - Produktionsreifer Fork mit Sicherheitsupdates
 
+> **ℹ️ Hinweis zu diesem Fork (`weigandf/homebridge-fritz-enhance`)**
+>
+> Dieses Repository ist ein Fork von [glowf1sh/homebridge-fritz-new](https://github.com/glowf1sh/homebridge-fritz-new).
+> Dort fehlt leider noch der Fix für **Homebridge 2.0**. Dieser Fork enthält diesen Fix sowie weitere Fixes und Updates
+> (z. B. Entfernung der veralteten Abhängigkeit `lodash.get`).
+>
+> Der Fork wird nur so lange genutzt, bis die Änderungen im Original-Repository verfügbar sind.
+
 > **🎆 STABLE RELEASE 1.0.76 - Produktionsreif für FRITZ!DECT 301 und DECT 200**  
 > Vollständig stabil, ohne UnhandledPromiseRejections oder Session-Errors.
 

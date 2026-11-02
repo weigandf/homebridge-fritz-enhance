@@ -27,7 +27,9 @@ Characteristic.Perms = {
 
 const homebridge = {
     hap: {
-        Characteristic: Characteristic
+        Characteristic: Characteristic,
+        Formats: Characteristic.Formats,
+        Perms: Characteristic.Perms
     },
     platformAccessory: function PlatformAccessory() {}
 };
